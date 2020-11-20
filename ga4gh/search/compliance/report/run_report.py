@@ -1,3 +1,5 @@
+import json
+
 class RunReport(object):
     """Global singleton holding all data to be output in report"""
 
@@ -27,6 +29,9 @@ class RunReport(object):
         self.started = None
         self.finished = None
         self.server_reports = []
+    
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__)
 
     # SETTERS AND GETTERS
 

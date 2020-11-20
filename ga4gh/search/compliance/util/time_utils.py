@@ -1,5 +1,8 @@
+import datetime
+
 class TimeUtils(object):
 
     @staticmethod
     def get_timestamp():
-        return "timestamp!"
+        d = datetime.datetime.utcnow()
+        return d.isoformat("T") + "Z"

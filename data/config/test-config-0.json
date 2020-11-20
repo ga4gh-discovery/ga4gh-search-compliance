@@ -1,12 +1,12 @@
 {
   "servers": [
     {
-      "name": "My Little Server",
-      "url": "https://search.ga4gh.org/api"
+      "name": "htsget",
+      "url": "https://htsget.ga4gh.org/reads"
     },
     {
-      "name": "My Big Server",
-      "url": "https://search-api.ga4gh-standards.com/"
+      "name": "Service Registry",
+      "url": "https://registry.ga4gh.org/v1"
     }
   ]
 }
