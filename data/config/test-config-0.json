@@ -1,0 +1,12 @@
+{
+  "servers": [
+    {
+      "name": "My Little Server",
+      "url": "https://search.ga4gh.org/api"
+    },
+    {
+      "name": "My Big Server",
+      "url": "https://search-api.ga4gh-standards.com/"
+    }
+  ]
+}
