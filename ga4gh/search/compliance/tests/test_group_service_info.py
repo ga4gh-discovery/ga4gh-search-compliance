@@ -21,7 +21,12 @@ SERVICE_INFO_TEST_CASES = [
             "/service-info",
             {},
             200,
-            None
+            "https://raw.githubusercontent.com/ga4gh-discovery/ga4gh-service-info/v1.0.0/service-info.yaml#/components/schemas/Service",
+            [
+                ("type.group", "org.ga4gh"),
+                ("type.artifact", "search"),
+                ("type.version", "1.0.0")
+            ]
         )
     )
 ]
