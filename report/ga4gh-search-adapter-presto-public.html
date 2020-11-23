@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>GA4GH Search Compliance Report</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="public/jquery.jsonPresenter.css">
+  <link rel="stylesheet" href="public/index.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="public/jquery.jsonPresenter.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+  
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+  <a id="navbar-title" class="navbar-brand" href="#">GA4GH Search v1.0.0 Compliance Report</a>
+</nav>
+
+<div class="container">
+  <p><a href="."><i class="fa fa-chevron-left"></i> Back</a></p>
+
+  <h1>GA4GH Search Compliance Report</h1>
+  <h2>Server: ga4gh-search-adapter-presto-public</h2>
+  <h4 class="tab1">Base URL: https://ga4gh-search-adapter-presto-public.prod.dnastack.com</h4>
+  <p class="tab1">Tests Run: 1</p>
+  <p class="tab1">Tests Passed: 0</p>
+  <p class="tab1">Tests Passed with Warnings: 0</p>
+  <p class="tab1">Tests Failed: 1</p>
+  <p class="tab1">Tests Skipped: 0</p>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#text">Text</a></li>
+    <li><a data-toggle="tab" href="#matrix">Matrix</a></li>
+  </ul>
+
+  <div class="tab-content">
+
+    <!-- Text Tab -->
+    <div id="text" class="tab-pane fade in active">
+      
+        <section id="service_info">
+          <div class="report-endpoint-section">
+            <h3 class="">Service Info</h3>
+            
+            
+            <h4 class="tab1 text-danger"><i class="fa fa-times-circle"></i> Test Case: Test Service Info - FAIL</h4>
+            <p class="tab3"><strong>Description:</strong> Tests the /service-info endpoint</p>
+            <p class="tab3"><strong>Summary:</strong> Response did not match expected schema at https://raw.githubusercontent.com/ga4gh-discovery/ga4gh-service-info/v1.0.0/service-info.yaml#/components/schemas/Service</p>
+
+            <p class="tab3">
+              <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-ga4gh-search-adapter-presto-public-service_info--Test_Service_Info" aria-expanded="false" aria-controls="collapse-ga4gh-search-adapter-presto-public-service_info--Test_Service_Info">
+                <i class="fa fa-info-circle"></i> Logs
+              </button>
+              <div class="collapse" id="collapse-ga4gh-search-adapter-presto-public-service_info--Test_Service_Info">
+                <div class="well audit-logs">
+                    
+                      <p class="audit-message">sending HTTP GET request to: https://ga4gh-search-adapter-presto-public.prod.dnastack.com/service-info</p>
+                    
+                      <p class="audit-message">assert status code matches expected</p>
+                    
+                      <p class="audit-message">assert response body conforms to the schema at: https://raw.githubusercontent.com/ga4gh-discovery/ga4gh-service-info/v1.0.0/service-info.yaml#/components/schemas/Service</p>
+                    
+                      <p class="audit-message">'type' is a required property
+
+Failed validating 'required' in schema:
+    {'description': 'GA4GH service',
+     'properties': {'contactUrl': {'description': 'URL of the contact for '
+                                                  'the provider of this '
+                                                  'service, e.g. a link to '
+                                                  'a contact form (RFC '
+                                                  '3986 format), or an '
+                                                  'email (RFC 2368 '
+                                                  'format).',
+                                   'example': 'mailto:support@example.com',
+                                   'format': 'uri',
+                                   'type': 'string'},
+                    'createdAt': {'description': 'Timestamp describing '
+                                                 'when the service was '
+                                                 'first deployed and '
+                                                 'available (RFC 3339 '
+                                                 'format)',
+                                  'example': '2019-06-04T12:58:19Z',
+                                  'format': 'date-time',
+                                  'type': 'string'},
+                    'description': {'description': 'Description of the '
+                                                   'service. Should be '
+                                                   'human readable and '
+                                                   'provide information '
+                                                   'about the service.',
+                                    'example': 'This service provides...',
+                                    'type': 'string'},
+                    'documentationUrl': {'description': 'URL of the '
+                                                        'documentation of '
+                                                        'this service (RFC '
+                                                        '3986 format). '
+                                                        'This should help '
+                                                        'someone learn how '
+                                                        'to use your '
+                                                        'service, '
+                                                        'including any '
+                                                        'specifics '
+                                                        'required to '
+                                                        'access data, e.g. '
+                                                        'authentication.',
+                                         'example': 'https://docs.myservice.example.com',
+                                         'format': 'uri',
+                                         'type': 'string'},
+                    'environment': {'description': 'Environment the '
+                                                   'service is running in. '
+                                                   'Use this to '
+                                                   'distinguish between '
+                                                   'production, '
+                                                   'development and '
+                                                   'testing/staging '
+                                                   'deployments. Suggested '
+                                                   'values are prod, test, '
+                                                   'dev, staging. However '
+                                                   'this is advised and '
+                                                   'not enforced.',
+                                    'example': 'test',
+                                    'type': 'string'},
+                    'id': {'description': 'Unique ID of this service. '
+                                          'Reverse domain name notation is '
+                                          'recommended, though not '
+                                          'required. The identifier should '
+                                          'attempt to be globally unique '
+                                          'so it can be used in downstream '
+                                          'aggregator services e.g. '
+                                          'Service Registry.',
+                           'example': 'org.ga4gh.myservice',
+                           'type': 'string'},
+                    'name': {'description': 'Name of this service. Should '
+                                            'be human readable.',
+                             'example': 'My project',
+                             'type': 'string'},
+                    'organization': {'description': 'Organization '
+                                                    'providing the service',
+                                     'properties': {'name': {'description': 'Name '
+                                                                            'of '
+                                                                            'the '
+                                                                            'organization '
+                                                                            'responsible '
+                                                                            'for '
+                                                                            'the '
+                                                                            'service',
+                                                             'example': 'My '
+                                                                        'organization',
+                                                             'type': 'string'},
+                                                    'url': {'description': 'URL '
+                                                                           'of '
+                                                                           'the '
+                                                                           'website '
+                                                                           'of '
+                                                                           'the '
+                                                                           'organization '
+                                                                           '(RFC '
+                                                                           '3986 '
+                                                                           'format)',
+                                                            'example': 'https://example.com',
+                                                            'format': 'uri',
+                                                            'type': 'string'}},
+                                     'required': ['name', 'url'],
+                                     'type': 'object'},
+                    'type': {'$ref': '#/components/schemas/ServiceType'},
+                    'updatedAt': {'description': 'Timestamp describing '
+                                                 'when the service was '
+                                                 'last updated (RFC 3339 '
+                                                 'format)',
+                                  'example': '2019-06-04T12:58:19Z',
+                                  'format': 'date-time',
+                                  'type': 'string'},
+                    'version': {'description': 'Version of the service '
+                                               'being described. Semantic '
+                                               'versioning is recommended, '
+                                               'but other identifiers, '
+                                               'such as dates or commit '
+                                               'hashes, are also allowed. '
+                                               'The version should be '
+                                               'changed whenever the '
+                                               'service is updated.',
+                                'example': '1.0.0',
+                                'type': 'string'}},
+     'required': ['id', 'name', 'type', 'organization', 'version'],
+     'type': 'object'}
+
+On instance:
+    {'contactUrl': 'mailto:support@dnastack.com',
+     'description': 'Supports data discovery by searching heterogeneous '
+                    'genomic and clinical data using a uniform query '
+                    'language.',
+     'documentationUrl': 'https://github.com/ga4gh-discovery/ga4gh-discovery-search',
+     'id': 'com.dnastack.search',
+     'name': 'search-presto-public',
+     'version': '0.4-234-gc59ee05'}</p>
+                    
+                </div>
+              </div>
+            </p>
+
+            
+            
+          </div>
+        </section>
+      
+        <section id="tables">
+          <div class="report-endpoint-section">
+            <h3 class="">Tables</h3>
+            
+            
+          </div>
+        </section>
+      
+        <section id="table_info">
+          <div class="report-endpoint-section">
+            <h3 class="">Table Info</h3>
+            
+            
+          </div>
+        </section>
+      
+        <section id="table_data">
+          <div class="report-endpoint-section">
+            <h3 class="">Table Data</h3>
+            
+            
+          </div>
+        </section>
+      
+        <section id="search">
+          <div class="report-endpoint-section">
+            <h3 class="">Search</h3>
+            
+            
+          </div>
+        </section>
+      
+    </div>
+
+    <!-- Matrix Tab -->
+    <div id="matrix" class="tab-pane fade">
+      <div class="container">
+          <table id="compliance_matrix" class="table">
+            <thead>
+              <th>Server</th>
+              <th>Test Group</th>
+              <th>Test Case</th>
+              <th>Status</th>
+            </thead>
+            <tbody>
+            
+              
+                <tr class="text-danger">
+                  <td>ga4gh-search-adapter-presto-public</td>
+                  <td>Service Info</td>
+                  <td>Test Service Info</td>
+                  <td>FAIL</td>
+                </tr>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+            </tbody>
+          </table>
+      </div>
+    </div>
+</div>
+
+<footer>
+  <div id="footer">
+    <h6>Global Alliance for Genomics and Health</h6>
+  </div>
+</footer>
+
+</body>
+</html>
