@@ -35,7 +35,11 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/ga4gh-discovery/ga4gh-search-compliance",
-    package_data={'': ['web/*/*', 'schemas/*']},
+    package_data={
+        '': [
+            'search/compliance/web/*/*',
+        ]
+    },
     packages=setuptools.find_packages(),
     install_requires=install_requires,
     entry_points='''

@@ -1,0 +1,82 @@
+{% include "partials/header.html" %}
+{% include "partials/navbar.html" %}
+
+<div class="container">
+  <p><a href="."><i class="fa fa-chevron-left"></i> Back</a></p>
+
+  <h1>GA4GH Search Compliance Report</h1>
+  <h2>Server: {{server_report.name}}</h2>
+  <h4 class="tab1">Base URL: {{server_report.url}}</h4>
+  <p class="tab1">Tests Run: {{server_report.summary.run}}</p>
+  <p class="tab1">Tests Passed: {{server_report.summary.passed}}</p>
+  <p class="tab1">Tests Passed with Warnings: {{server_report.summary.warned}}</p>
+  <p class="tab1">Tests Failed: {{server_report.summary.failed}}</p>
+  <p class="tab1">Tests Skipped: {{server_report.summary.skipped}}</p>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#text">Text</a></li>
+    <li><a data-toggle="tab" href="#matrix">Matrix</a></li>
+  </ul>
+
+  <div class="tab-content">
+
+    <!-- Text Tab -->
+    <div id="text" class="tab-pane fade in active">
+      {% for endpoint in h.s.endpoints %}
+        <section id="{{endpoint}}">
+          <div class="report-endpoint-section">
+            <h3 class="">{{h.s.formatted[endpoint]}}</h3>
+            
+            {% for test_case_report in server_report.test_group_reports[endpoint].test_case_reports %}
+            <h4 class="tab1 {{ h.s.status[test_case_report.status].css_class }}"><i class="fa {{h.s.status[test_case_report.status].fa_class}}"></i> Test Case: {{h.f.format_test_name(test_case_report.name)}} - {{ h.s.status[test_case_report.status].status }}</h4>
+            <p class="tab3"><strong>Description:</strong> {{test_case_report.description}}</p>
+            <p class="tab3"><strong>Summary:</strong> {{test_case_report.message}}</p>
+
+            <p class="tab3">
+              <button class="btn btn-info tr-elem" type="button" data-toggle="collapse" data-target="#collapse-{{h.f.rm_space(server_report.name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(test_case_report.name)}}" aria-expanded="false" aria-controls="collapse-{{h.f.rm_space(server_report.name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(test_case_report.name)}}">
+                <i class="fa fa-info-circle"></i> Logs
+              </button>
+              <div class="collapse" id="collapse-{{h.f.rm_space(server_report.name)}}-{{endpoint}}-{{ins_key}}-{{h.f.rm_space(test_case_report.name)}}">
+                <div class="well audit-logs">
+                    {% for log_message in test_case_report.log_messages %}
+                      <p class="audit-message">{{log_message}}</p>
+                    {% endfor %}
+                </div>
+              </div>
+            </p>
+
+            
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+    </div>
+
+    <!-- Matrix Tab -->
+    <div id="matrix" class="tab-pane fade">
+      <div class="container">
+          <table id="compliance_matrix" class="table">
+            <thead>
+              <th>Server</th>
+              <th>Test Group</th>
+              <th>Test Case</th>
+              <th>Status</th>
+            </thead>
+            <tbody>
+            {% for endpoint in h.s.endpoints %}
+              {% for test_case_report in server_report.test_group_reports[endpoint].test_case_reports %}
+                <tr class="{{h.s.status[test_case_report.status].css_class}}">
+                  <td>{{server_report.name}}</td>
+                  <td>{{h.s.formatted[endpoint]}}</td>
+                  <td>{{test_case_report.name}}</td>
+                  <td>{{h.s.status[test_case_report.status].status}}</td>
+                </tr>
+              {% endfor %}
+            {% endfor %}
+            </tbody>
+          </table>
+      </div>
+    </div>
+</div>
+
+{% include "partials/footer.html" %}

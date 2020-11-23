@@ -10,24 +10,27 @@ def api_test(endpoint, query_params, exp_status, schema_url, req_prop_vals, serv
 
         # construct full URL
         url = StaticUtils.remove_trailing_slash(server_config.get_url()) + endpoint
-        test_case_report.add_log_message("GET %s" % url)
+        test_case_report.add_log_message("sending HTTP GET request to: %s" % url)
 
         # execute HTTP request
+        test_case_report.add_log_message("assert status code matches expected")
         response = requests.get(url)
         if response.status_code != exp_status:
             raise TestMethodException("observed code %s != expected code %s" % (str(response.status_code), str(exp_status)))
 
         # check that response body matches expected schema
+        test_case_report.add_log_message("assert response body conforms to the schema at: %s" % schema_url)
         response_dict = response.json()
         schema_validator = SchemaValidator(schema_url)
         schema_validator.load_schema()
-        schema_validator.validate_instance(response_dict)
+        schema_validator.validate_instance(response_dict, test_case_report)
 
         # custom validation of individual properties
         for prop, exp_val in req_prop_vals:
             obs_val = response_dict
             for key in prop.split("."):
                 obs_val = obs_val[key]
+            test_case_report.add_log_message("assert value of %s is %s" % (prop, exp_val))
             if obs_val != exp_val:
                 raise TestMethodException("property %s MUST be %s, was %s" % (prop, exp_val, obs_val))
 

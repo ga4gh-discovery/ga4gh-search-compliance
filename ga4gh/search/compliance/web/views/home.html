@@ -1,0 +1,50 @@
+{% include "partials/header.html" %}
+{% include "partials/navbar.html" %}
+
+<div class="container">
+
+  <div id="details-div">
+    <h3>Details</h3>
+    <p>Generated on {{h.f.timestamp()}}</p>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Server</th>
+        <th scope="col">Base URL</th>
+        <th scope="col">Service Info</th>
+        <th scope="col">Tables</th>
+        <th scope="col">Table Info</th>
+        <th scope="col">Table Data</th>
+        <th scope="col">Search</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for server_report in data.server_reports %}
+      {% set base_ref = h.f.server_name_url(server_report.name) %}
+      <tr>
+        <th scope="row"><a href="{{base_ref}}">{{server_report.name}}</a></th>
+        <td>{{server_report.url}}</td>
+        {% set routes = ["service_info", "tables", "table_info", "table_data", "search"] %}
+        {% for route in routes %}
+        {% set r = h.f.route_status(server_report["test_group_reports"][route]) %}
+        <td><a href="{{base_ref}}#{{route}}" class="btn {{r['btn']}}">{{r["text"]}}</a></td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div id="links-div">
+    <h3>Links</h3>
+    <ul>
+      <li><a href="https://github.com/ga4gh-discovery/ga4gh-search">GA4GH Search Specification</a></li>
+      <!-- <li><a href="https://rnaget-compliance-suite.readthedocs.io/en/latest/">RNAget compliance documentation</a></li> -->
+      <!-- <li><a href="https://github.com/ga4gh-rnaseq/rnaget-compliance-suite">RNAget compliance application</a></li> -->
+    </ul>
+  </div>
+
+</div>
+
+{% include "partials/footer.html" %}

@@ -1,6 +1,10 @@
 {
   "servers": [
     {
+      "name": "ga4gh-search-adapter-presto-public",
+      "url": "https://ga4gh-search-adapter-presto-public.prod.dnastack.com"
+    },
+    {
       "name": "htsget",
       "url": "https://htsget.ga4gh.org/reads"
     },

@@ -25,11 +25,12 @@ class SchemaValidator(object):
         self.specification_dict = yaml.safe_load(response.content)
         self.__traverse_specification_to_schema()
     
-    def validate_instance(self, instance):
+    def validate_instance(self, instance, test_case_report):
         resolver = jsonschema.RefResolver("", self.specification_dict)
         try:
             jsonschema.validate(instance, self.schema_dict, resolver=resolver)
         except jsonschema.exceptions.ValidationError as e:
+            test_case_report.add_log_message(str(e))
             raise TestMethodException("Response did not match expected schema at %s" % self.schema_url)
 
     def __parse_schema_url(self):
