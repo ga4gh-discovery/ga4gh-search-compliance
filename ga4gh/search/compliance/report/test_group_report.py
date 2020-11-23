@@ -8,7 +8,6 @@ class TestGroupReport(object):
         self.summary = None
     
     def summarize(self):
-        print("summarizing")
         summary = Summary()
         increment_fns = [
             summary.increment_incomplete,

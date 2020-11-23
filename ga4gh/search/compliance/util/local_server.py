@@ -232,18 +232,12 @@ class LocalServer(object):
         open(home_path, "w").write(home_rendered)
 
         for server_report in data["server_reports"]:
-            print("a")
             report_template = view_env.get_template("views/report.html")
-            print("b")
             report_rendered = report_template.render(server_report=server_report,
                                                      h=self.render_helper)
-            print("c")
-            print(server_report)
             report_path = self.web_dir + "/" + \
                 self.render_helper["f"]["server_name_url"](server_report["name"])
-            print("d")
             open(report_path, "w").write(report_rendered)
-            print("e")
         
     def __start_mock_server(self, uptime):
         """run server to serve final test report
